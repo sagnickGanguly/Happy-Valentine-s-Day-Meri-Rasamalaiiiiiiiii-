@@ -33,14 +33,14 @@
             min-height: 100vh;
         }
 
-        /* --- Floating Hearts Background --- */
+        /* --- FIXED: Added pointer-events: none to prevent blocking clicks --- */
         .heart-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            pointer-events: none !important; /* CRITICAL FIX */
             z-index: 0;
             overflow: hidden;
         }
@@ -50,6 +50,7 @@
             bottom: -100px;
             color: rgba(212, 20, 90, 0.2);
             animation: floatUp 15s linear infinite;
+            pointer-events: none !important; /* CRITICAL FIX */
         }
 
         @keyframes floatUp {
@@ -57,22 +58,32 @@
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Music Player --- */
+        /* --- FIXED: Brought Music Player to Front --- */
         .music-player {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.9);
             padding: 10px 20px;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 9999; /* TOP LAYER */
             display: flex;
             align-items: center;
             gap: 10px;
-            border: 1px solid pink;
+            border: 2px solid var(--primary);
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .music-player:active {
+            transform: scale(0.95);
+        }
+
+        /* --- FIXED: Ensure Sections are Clickable --- */
+        section {
+            position: relative;
+            z-index: 10; /* ABOVE BACKGROUND */
         }
 
         /* --- Hero Section --- */
@@ -83,8 +94,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-            z-index: 1;
         }
 
         .hero h1 {
@@ -104,14 +113,6 @@
             color: #d4145a;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            animation: bounce 2s infinite;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
         /* --- Counter Section --- */
         .counter-section {
             padding: 50px 20px;
@@ -119,7 +120,6 @@
             background: rgba(255,255,255,0.6);
             margin: 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         .timer {
@@ -145,7 +145,7 @@
             color: var(--primary);
         }
 
-        /* --- Gallery (Polaroid Style) --- */
+        /* --- Gallery --- */
         .gallery-section {
             padding: 60px 20px;
             text-align: center;
@@ -168,41 +168,14 @@
             width: 250px;
         }
 
-        .polaroid:nth-child(even) {
-            transform: rotate(3deg);
-        }
+        .polaroid:nth-child(even) { transform: rotate(3deg); }
+        .polaroid:hover { transform: rotate(0) scale(1.1); z-index: 20; }
+        .polaroid img { width: 100%; height: 250px; object-fit: cover; border: 1px solid #eee; }
+        .polaroid p { font-family: var(--handwriting-font); font-size: 1.5rem; margin-top: 15px; color: #555; }
 
-        .polaroid:hover {
-            transform: rotate(0) scale(1.1);
-            z-index: 10;
-        }
-
-        .polaroid img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border: 1px solid #eee;
-        }
-
-        .polaroid p {
-            font-family: var(--handwriting-font);
-            font-size: 1.5rem;
-            margin-top: 15px;
-            color: #555;
-        }
-
-        /* --- Quotes Section --- */
-        .quotes-section {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .quote-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
+        /* --- Quotes --- */
+        .quotes-section { padding: 80px 20px; background: white; }
+        .quote-container { max-width: 800px; margin: 0 auto; }
         .quote-card {
             background: linear-gradient(135deg, #fff0f5 0%, #fff 100%);
             padding: 40px;
@@ -212,30 +185,16 @@
             border-left: 5px solid var(--primary);
             transition: transform 0.3s;
         }
+        .quote-card:hover { transform: translateX(10px); }
+        .quote-text { font-family: var(--elegant-font); font-size: 1.2rem; font-style: italic; line-height: 1.6; }
+        .heart-icon { color: var(--primary); margin-right: 10px; }
 
-        .quote-card:hover {
-            transform: translateX(10px);
-        }
-
-        .quote-text {
-            font-family: var(--elegant-font);
-            font-size: 1.2rem;
-            font-style: italic;
-            line-height: 1.6;
-        }
-
-        .heart-icon {
-            color: var(--primary);
-            margin-right: 10px;
-        }
-
-        /* --- Interactive "Reasons" --- */
-        .reasons-section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-
+        /* --- Interactive Reasons --- */
+        .reasons-section { padding: 60px 20px; text-align: center; }
+        
         .btn-love {
+            position: relative;
+            z-index: 50; /* Ensure button is clickable */
             padding: 15px 40px;
             font-size: 1.2rem;
             background: var(--primary);
@@ -248,10 +207,8 @@
             transition: transform 0.2s;
         }
 
-        .btn-love:active {
-            transform: scale(0.95);
-        }
-
+        .btn-love:active { transform: scale(0.95); }
+        
         #reason-display {
             margin-top: 30px;
             font-size: 1.5rem;
@@ -261,7 +218,7 @@
             font-weight: bold;
         }
 
-        /* --- The Letter --- */
+        /* --- Letter --- */
         .letter-section {
             max-width: 700px;
             margin: 50px auto;
@@ -272,15 +229,9 @@
             background-image: radial-gradient(#eee 1px, transparent 1px);
             background-size: 20px 20px;
         }
+        .letter-content { font-family: var(--handwriting-font); font-size: 1.8rem; line-height: 1.8; color: #333; }
 
-        .letter-content {
-            font-family: var(--handwriting-font);
-            font-size: 1.8rem;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        /* --- Grand Finale --- */
+        /* --- Finale --- */
         .finale {
             height: 100vh;
             display: flex;
@@ -291,6 +242,7 @@
             color: white;
             text-align: center;
             position: relative;
+            z-index: 100;
         }
 
         .big-heart-container {
@@ -306,7 +258,7 @@
             font-size: 4rem;
             color: #ff4d6d;
             text-shadow: 0 0 20px #ff4d6d;
-            opacity: 0; /* Hidden initially */
+            opacity: 0;
             transform: scale(0.5);
             transition: all 2s ease;
         }
@@ -322,22 +274,11 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-top: 20px;
-            z-index: 10;
+            z-index: 101; /* Must be high */
         }
 
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
-        }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
         
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
             .typewriter { font-size: 1.5rem; }
@@ -361,9 +302,6 @@
     <section class="hero">
         <h1>Happy Valentine's Day</h1>
         <div class="typewriter" id="typewriter"></div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
     </section>
 
     <section class="counter-section">
@@ -375,19 +313,16 @@
         <h2 style="font-family: var(--handwriting-font); font-size: 3rem; margin-bottom: 20px;">My Favorite Views</h2>
         <div class="gallery-container">
             <div class="polaroid">
-                <img src="pic 1.jpg" alt="You">
-            
-                <p>That smile...</p>
+                <img src="pic 1.jpg" alt="Memory 1">
+                <p>That smile😚...</p>
             </div>
             <div class="polaroid">
-                <img src="pic 2.jpg" alt="You">
-              
-                <p>The Eyes I Always Fall For</p>
+                <img src="pic 2.jpg" alt="Memory 2">
+                <p>The Eyes I Always Fall For🫠</p>
             </div>
             <div class="polaroid">
-                <img src= "pic 3.jpg" alt="You">
-              
-                <p>My goofball</p>
+                <img src="pic 3.jpg" alt="Memory 3">
+                <p>My goofball❤️</p>
             </div>
         </div>
     </section>
@@ -396,15 +331,8 @@
         <h2 style="text-align: center; font-family: var(--handwriting-font); font-size: 3rem; margin-bottom: 40px;">Words for You</h2>
         <div class="quote-container">
             <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"I look at you and see the rest of my life in front of my eyes."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"If I had a flower for every time I thought of you... I could walk through my garden forever."</span></div>
             <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"You are my sun, my moon, and all my stars."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"I swear I couldn't love you more than I do right now, and yet I know I will tomorrow."</span></div>
             <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"Thinking of you keeps me awake. Dreaming of you keeps me asleep. Being with you keeps me alive."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"I choose you. And I'll choose you over and over and over. Without pause, without a doubt, in a heartbeat. I'll keep choosing you."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"You are the finest, loveliest, tenderest, and most beautiful person I have ever known—and even that is an understatement."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"It was a million tiny little things that, when you added them all up, they meant we were supposed to be together."</span></div>
-            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"Whatever our souls are made of, yours and mine are the same."</span></div>
         </div>
     </section>
 
@@ -418,8 +346,7 @@
     <section class="letter-section">
         <div class="letter-content">
             <p>Dearest,</p>
-            <p>I wanted to make something that lasts longer than flowers and tastes sweeter than chocolate. Something that shows the world (and your friends) just how lucky I am.</p>
-            <p>You make my world brighter, my days happier, and my heart fuller. Every moment with you is a treasure I keep safe.</p>
+            <p>I wanted to make something that lasts longer than flowers. You make my world brighter, my days happier, and my heart fuller.</p>
             <p>Thank you for being my partner, my best friend, and my safe place.</p>
             <p style="text-align: right; margin-top: 20px;">- Always Yours</p>
         </div>
@@ -440,11 +367,8 @@
     </section>
 
     <script>
-        // --- Configuration: Start Date of Relationship ---
-        // Change these numbers: Year, Month (0=Jan, 1=Feb, etc), Day
-        const startDate = new Date(2025, 5, 18); 
+        const startDate = new Date(2025, 5,  18); // Change this date
 
-        // --- Typing Effect ---
         const text = ["To the most beautiful girl...", "To my best friend...", "To the love of my life..."];
         let count = 0;
         let index = 0;
@@ -452,33 +376,26 @@
         let letter = "";
         
         (function type() {
-            if (count === text.length) {
-                count = 0;
-            }
+            if (count === text.length) { count = 0; }
             currentText = text[count];
             letter = currentText.slice(0, ++index);
-            
             document.getElementById('typewriter').textContent = letter;
-            
             if (letter.length === currentText.length) {
                 count++;
                 index = 0;
-                setTimeout(type, 2000); // Pause at end of sentence
+                setTimeout(type, 2000);
             } else {
-                setTimeout(type, 100); // Typing speed
+                setTimeout(type, 100);
             }
         }());
 
-        // --- Timer Logic ---
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
-            
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / 1000 / 60) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
-            
             document.getElementById('timer').innerHTML = `
                 <div class="time-box"><span>${days}</span>Days</div>
                 <div class="time-box"><span>${hours}</span>Hours</div>
@@ -488,16 +405,14 @@
         }
         setInterval(updateTimer, 1000);
 
-        // --- Reasons Generator ---
         const reasons = [
             "Your laugh is my favorite sound.",
-            "You make even boring things fun.",
+            "You make boring things fun.",
             "You understand me without words.",
             "Your kindness inspires me.",
             "The way your eyes sparkle.",
             "You give the best hugs.",
             "You are my home.",
-            "You make me a better person.",
             "You're just so cute when you're mad!",
             "I love your 'Rasamalai' sweetness!"
         ];
@@ -512,23 +427,18 @@
             }, 200);
         }
 
-        // --- Floating Hearts Background ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('floating-heart');
             heart.innerHTML = '<i class="fas fa-heart"></i>';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5-10s
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
             heart.style.fontSize = Math.random() * 20 + 10 + 'px';
             document.getElementById('heart-bg').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 10000);
+            setTimeout(() => { heart.remove(); }, 10000);
         }
         setInterval(createHeart, 500);
 
-        // --- Music Toggle ---
         function toggleMusic() {
             const audio = document.getElementById('bg-music');
             const text = document.getElementById('music-text');
@@ -541,35 +451,12 @@
             }
         }
 
-        // --- Reveal Finale ---
         function revealMessage(btn) {
             btn.style.display = 'none';
             const msg = document.getElementById('final-message');
             msg.style.opacity = 1;
             msg.style.transform = 'scale(1)';
-            
-            // Explosion of confetti hearts
-            for(let i=0; i<50; i++) {
-                createExplosionHeart();
-            }
         }
-
-        function createExplosionHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.style.position = 'absolute';
-            heart.style.left = '50%';
-            heart.style.top = '50%';
-            heart.style.fontSize = '20px';
-            heart.style.transition = 'all 1s ease';
-            document.querySelector('.finale').appendChild(heart);
-            
-            setTimeout(() => {
-                const x = (Math.random() - 0.5) * 500;
-                const y = (Math.random() - 0.5) * 500;
-                heart.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*360}deg)`;
-                heart.style.opacity = 0;
-            }, 50);
-
-            setTimeout(() => {
-         
+    </script>
+</body>
+</html>
