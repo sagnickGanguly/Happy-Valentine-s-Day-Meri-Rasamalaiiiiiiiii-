@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Rasamalai ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #d4145a;
+            --secondary: #fbb03b;
+            --bg-color: #fff0f5;
+            --text-color: #4a4a4a;
+            --handwriting-font: 'Dancing Script', cursive;
+            --elegant-font: 'Playfair Display', serif;
+            --signature-font: 'Sacramento', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+            color: var(--text-color);
+            font-family: var(--elegant-font);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- Floating Hearts Background --- */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -100px;
+            color: rgba(212, 20, 90, 0.2);
+            animation: floatUp 15s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Music Player --- */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid pink;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: var(--signature-font);
+            font-size: 5rem;
+            background: -webkit-linear-gradient(var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .typewriter {
+            font-family: var(--handwriting-font);
+            font-size: 2rem;
+            min-height: 3em;
+            color: #d4145a;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* --- Counter Section --- */
+        .counter-section {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255,255,255,0.6);
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 100px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* --- Gallery (Polaroid Style) --- */
+        .gallery-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: rotate(-3deg);
+            transition: all 0.3s ease;
+            width: 250px;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(3deg);
+        }
+
+        .polaroid:hover {
+            transform: rotate(0) scale(1.1);
+            z-index: 10;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        .polaroid p {
+            font-family: var(--handwriting-font);
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        /* --- Quotes Section --- */
+        .quotes-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .quote-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .quote-card {
+            background: linear-gradient(135deg, #fff0f5 0%, #fff 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .quote-card:hover {
+            transform: translateX(10px);
+        }
+
+        .quote-text {
+            font-family: var(--elegant-font);
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .heart-icon {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        /* --- Interactive "Reasons" --- */
+        .reasons-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .btn-love {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--handwriting-font);
+            box-shadow: 0 5px 15px rgba(212, 20, 90, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-love:active {
+            transform: scale(0.95);
+        }
+
+        #reason-display {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            font-family: var(--elegant-font);
+            min-height: 50px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- The Letter --- */
+        .letter-section {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            background-image: radial-gradient(#eee 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .letter-content {
+            font-family: var(--handwriting-font);
+            font-size: 1.8rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* --- Grand Finale --- */
+        .finale {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .big-heart-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .final-text {
+            font-family: var(--signature-font);
+            font-size: 4rem;
+            color: #ff4d6d;
+            text-shadow: 0 0 20px #ff4d6d;
+            opacity: 0; /* Hidden initially */
+            transform: scale(0.5);
+            transition: all 2s ease;
+        }
+
+        .reveal-btn {
+            padding: 15px 30px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .typewriter { font-size: 1.5rem; }
+            .final-text { font-size: 2.5rem; }
+            .letter-section { padding: 20px; width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <div class="music-player" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+        <span id="music-text">Play Our Song</span>
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <section class="hero">
+        <h1>Happy Valentine's Day</h1>
+        <div class="typewriter" id="typewriter"></div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="counter-section">
+        <h2>We've been falling in love for:</h2>
+        <div class="timer" id="timer"></div>
+    </section>
+
+    <section class="gallery-section">
+        <h2 style="font-family: var(--handwriting-font); font-size: 3rem; margin-bottom: 20px;">My Favorite Views</h2>
+        <div class="gallery-container">
+            <div class="polaroid">
+                <img src="pic 1.jpg" alt="You">
+            
+                <p>That smile...</p>
+            </div>
+            <div class="polaroid">
+                <img src="pic 2.jpg" alt="You">
+              
+                <p>The Eyes I Always Fall For</p>
+            </div>
+            <div class="polaroid">
+                <img src= "pic 3.jpg" alt="You">
+              
+                <p>My goofball</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quotes-section">
+        <h2 style="text-align: center; font-family: var(--handwriting-font); font-size: 3rem; margin-bottom: 40px;">Words for You</h2>
+        <div class="quote-container">
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"I look at you and see the rest of my life in front of my eyes."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"If I had a flower for every time I thought of you... I could walk through my garden forever."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"You are my sun, my moon, and all my stars."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"I swear I couldn't love you more than I do right now, and yet I know I will tomorrow."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"Thinking of you keeps me awake. Dreaming of you keeps me asleep. Being with you keeps me alive."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"I choose you. And I'll choose you over and over and over. Without pause, without a doubt, in a heartbeat. I'll keep choosing you."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"You are the finest, loveliest, tenderest, and most beautiful person I have ever known—and even that is an understatement."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"It was a million tiny little things that, when you added them all up, they meant we were supposed to be together."</span></div>
+            <div class="quote-card"><i class="fas fa-heart heart-icon"></i><span class="quote-text">"Whatever our souls are made of, yours and mine are the same."</span></div>
+        </div>
+    </section>
+
+    <section class="reasons-section">
+        <h2 style="font-family: var(--handwriting-font); font-size: 2.5rem;">Click for a reason why I love you</h2>
+        <br>
+        <button class="btn-love" onclick="showReason()">Tell Me Why ❤️</button>
+        <div id="reason-display"></div>
+    </section>
+
+    <section class="letter-section">
+        <div class="letter-content">
+            <p>Dearest,</p>
+            <p>I wanted to make something that lasts longer than flowers and tastes sweeter than chocolate. Something that shows the world (and your friends) just how lucky I am.</p>
+            <p>You make my world brighter, my days happier, and my heart fuller. Every moment with you is a treasure I keep safe.</p>
+            <p>Thank you for being my partner, my best friend, and my safe place.</p>
+            <p style="text-align: right; margin-top: 20px;">- Always Yours</p>
+        </div>
+    </section>
+
+    <section class="finale">
+        <div class="big-heart-container">
+            <i class="fas fa-heart" style="font-size: 100px; color: #ff4d6d;"></i>
+        </div>
+        
+        <button class="reveal-btn" onclick="revealMessage(this)">Click for One Last Thing</button>
+        
+        <div id="final-message" class="final-text">
+            I love you<br>
+            meriiii rasamalaiiiiiiiii<br>
+            😚😚❤️❤️
+        </div>
+    </section>
+
+    <script>
+        // --- Configuration: Start Date of Relationship ---
+        // Change these numbers: Year, Month (0=Jan, 1=Feb, etc), Day
+        const startDate = new Date(2025, 5, 18); 
+
+        // --- Typing Effect ---
+        const text = ["To the most beautiful girl...", "To my best friend...", "To the love of my life..."];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        
+        (function type() {
+            if (count === text.length) {
+                count = 0;
+            }
+            currentText = text[count];
+            letter = currentText.slice(0, ++index);
+            
+            document.getElementById('typewriter').textContent = letter;
+            
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000); // Pause at end of sentence
+            } else {
+                setTimeout(type, 100); // Typing speed
+            }
+        }());
+
+        // --- Timer Logic ---
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            
+            document.getElementById('timer').innerHTML = `
+                <div class="time-box"><span>${days}</span>Days</div>
+                <div class="time-box"><span>${hours}</span>Hours</div>
+                <div class="time-box"><span>${minutes}</span>Mins</div>
+                <div class="time-box"><span>${seconds}</span>Secs</div>
+            `;
+        }
+        setInterval(updateTimer, 1000);
+
+        // --- Reasons Generator ---
+        const reasons = [
+            "Your laugh is my favorite sound.",
+            "You make even boring things fun.",
+            "You understand me without words.",
+            "Your kindness inspires me.",
+            "The way your eyes sparkle.",
+            "You give the best hugs.",
+            "You are my home.",
+            "You make me a better person.",
+            "You're just so cute when you're mad!",
+            "I love your 'Rasamalai' sweetness!"
+        ];
+
+        function showReason() {
+            const display = document.getElementById('reason-display');
+            const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerText = randomReason;
+                display.style.opacity = 1;
+            }, 200);
+        }
+
+        // --- Floating Hearts Background ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5-10s
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.getElementById('heart-bg').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+        setInterval(createHeart, 500);
+
+        // --- Music Toggle ---
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const text = document.getElementById('music-text');
+            if (audio.paused) {
+                audio.play();
+                text.innerText = "Playing Our Song...";
+            } else {
+                audio.pause();
+                text.innerText = "Play Our Song";
+            }
+        }
+
+        // --- Reveal Finale ---
+        function revealMessage(btn) {
+            btn.style.display = 'none';
+            const msg = document.getElementById('final-message');
+            msg.style.opacity = 1;
+            msg.style.transform = 'scale(1)';
+            
+            // Explosion of confetti hearts
+            for(let i=0; i<50; i++) {
+                createExplosionHeart();
+            }
+        }
+
+        function createExplosionHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'absolute';
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.fontSize = '20px';
+            heart.style.transition = 'all 1s ease';
+            document.querySelector('.finale').appendChild(heart);
+            
+            setTimeout(() => {
+                const x = (Math.random() - 0.5) * 500;
+                const y = (Math.random() - 0.5) * 500;
+                heart.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*360}deg)`;
+                heart.style.opacity = 0;
+            }, 50);
+
+            setTimeout(() => {
+         
